@@ -1,0 +1,12 @@
+TABLA PROVEEDORES:
+
+    - ID
+    - Nombre
+    - Correo Electronico
+    - Tipo de proveedor ID
+    - Activos o no
+
+TABLA TIPODEPROVEEDOR:
+
+    - ID
+    - Nombre del tipo de proveedor

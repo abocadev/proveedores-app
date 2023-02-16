@@ -1,0 +1,13 @@
+controllers:
+    resource: ../src/Controller/
+    type: attribute
+
+app_hello:
+    path: /hello
+    defaults: { _controller: App\Controller\HelloController::index }
+
+
+
+delete_provider:
+    path: /delete/{id}
+    controller: 'App\Controller\DeleteProviderController::delete'

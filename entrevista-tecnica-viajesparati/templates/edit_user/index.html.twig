@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar proveedor{% endblock %}
+
+{% block body %}
+
+    <style>
+        form > * {
+            display: block;
+        }
+    </style>
+    <div class="">
+
+        <h1 class="text-center mt-3">Editar proveedor: {{ provider.name }}</h1>
+
+        <div class="card shadow m-auto p-5 rounded-3 d-flex mt-lg-5" style="width: 35%">
+            <form method="POST" action="{{ path('post_edit_user', {'id': provider.id}) }}">
+                <label class="navbar-text">Nombre de proveedor:</label>
+                <input type="text" class="input-group-text w-100 text-start" value="{{ provider.name }}" name="name" />
+
+                <label class="navbar-text">Numero de telefono:</label>
+                <input type="tel" class="input-group-text w-100 text-start" value="{{ provider.tel }}" name="tel" />
+
+                <label class="navbar-text">Correo electronico:</label>
+                <input type="email" class="input-group-text w-100 text-start" value="{{ provider.email }}" name="email" />
+                <label class="navbar-text mt-2">
+                    {% if provider.active == 1 %} <input type="checkbox" name="active" checked value="check"/> Proveedor activo
+                    {% elseif provider.active == 0 %} <input type="checkbox" name="active" value="check"/> Proveedor activo
+                    {% endif %}
+                </label>
+
+                <label class="navbar-text">Seleccionar tipo de proveedor:</label>
+                <select class="input-group-text w-100 text-start" name="type">
+                    {% for type in types %}
+                        {% if provider.type.id == type.id %} <option selected value="{{ type.id }}">{{ type.name }}</option>
+                        {% else %} <option value="{{ type.id }}">{{ type.name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+
+                <input class="btn btn-success d-flex mt-4 mx-auto shadow" type="submit" value="Enviar">
+                <input type="hidden" name="_method" value="POST"/>
+                <input type="hidden" name="_token" value="{{ csrf_token('post' ~ provider.id) }}"/>
+            </form>
+        </div>
+
+        {% for type, message in app.session.flashbag.all() %}
+            <div class="alert-danger d-flex mx-auto p-3 w-25 mt-3"> {{ message[0] }} </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}
