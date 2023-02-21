@@ -4,7 +4,9 @@
 
 {% block body %}
     {% for type, message in app.session.flashbag.all() %}
-        <div class="alert-success d-flex mx-auto p-3 w-25 mt-3"> {{ message[0] }} </div>
+        <div class="alert-{{ type }} rounded-3 d-flex mx-auto p-3 w-25 mt-3">
+            {{ message[0] }}
+        </div>
     {% endfor %}
     <main class="row mx-auto">
         {% for provider in providers %}

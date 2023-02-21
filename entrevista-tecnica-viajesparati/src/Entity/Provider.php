@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Form\ProviderType;
 use App\Repository\ProviderRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,13 +18,15 @@ class Provider
     private ?int $id = null;
 
     // Campo name
-    #[ORM\Column(type: 'string', length:55)]
-    #[Assert\NotBlank(message: "El mensaje es obligatorio")]
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(message: "El campo del nombre es obligatorio")]
+    #[Assert\Length(min: 4, max: 250, minMessage: "Ingresa un nombre mayor de 4 caracteres", maxMessage: "Ingresa un nombre menor de 250 caracteres")]
     private $name;
 
     // Campo email
-    #[ORM\Column(type: 'string', length:100)]
-    #[Assert\NotBlank(message: "El email {{value}} no es valido")]
+    #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(message: "El campo del correo no es valido")]
+    #[Assert\Length(min: 4, max: 250, minMessage: "Ingresa un correo mayor de 4 caracteres", maxMessage: "Ingresa un correo menor de 250 caracteres")]
     #[Assert\Email]
     private $email;
 
@@ -38,7 +41,6 @@ class Provider
 
     // Campo fecha creado
     #[ORM\Column(type: 'date')]
-    #[Assert\NotBlank]
     private $date_created;
 
     # Campo fecha actualizada
@@ -47,7 +49,14 @@ class Provider
 
     # Campo telefono
     #[ORM\Column(type: 'string')]
+    #[Assert\NotBlank(message: "El campo del telefono no es valido")]
+    #[Assert\Length(min: 7, max: 15, minMessage: "Ingresa un numero de telefono mayor de 7 caracteres", maxMessage: "Ingresa un numero de telefono menor de 15 caracterest")]
     private $tel;
+
+    public function __construct($name = null, $email = null, $type = null, $active = null, $date_created  = null, $date_updated = null, $tel = null)
+    {
+
+    }
 
     public function getId(): ?int
     {

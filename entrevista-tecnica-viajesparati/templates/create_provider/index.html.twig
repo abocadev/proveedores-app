@@ -3,49 +3,13 @@
 {% block title %}Crear proveedor{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-    <style>
-        form > * {
-            display: block;
-        }
-    </style>
+    <style> form > * { display: block; } </style>
+
     <div>
-
         <h1 class="text-center mt-3">Crear proveedor</h1>
-
-        <div class="card shadow m-auto p-5 rounded-3 d-flex mt-lg-5" style="width: 35%">
-            <form method="POST" action="{{ path('post_create_provider') }}">
-                <label class="navbar-text">Nombre de proveedor:</label>
-                <input type="text" class="input-group-text w-100 text-start" name="name" />
-
-                <label class="navbar-text">Numero de telefono:</label>
-                <input type="tel" class="input-group-text w-100 text-start" name="tel" />
-
-                <label class="navbar-text">Correo electronico:</label>
-                <input type="email" class="input-group-text w-100 text-start" name="email" />
-
-                <label class="navbar-text mt-2">
-                    <input type="checkbox" name="active"  value="check"/> Proveedor activo
-                </label>
-
-                <label class="navbar-text">Seleccionar tipo de proveedor:</label>
-                <select class="input-group-text w-100 text-start" name="type">
-                    {% for type in types %}
-                        <option value="{{ type.id }}">{{ type.name }}</option>
-                    {% endfor %}
-                </select>
-
-                <input class="btn btn-success d-flex mt-4 mx-auto shadow" type="submit" value="Enviar">
-            </form>
+        <div class="card shadow m-auto p-4 rounded-3 d-flex mt-lg-5" style="width: 35%">
+            {{ form(form) }}
         </div>
-
-        {% for type, message in app.session.flashbag.all() %}
-            <div class="alert-danger d-flex mx-auto p-3 w-25 mt-3"> {{ message[0] }} </div>
-        {% endfor %}
-
     </div>
 {% endblock %}

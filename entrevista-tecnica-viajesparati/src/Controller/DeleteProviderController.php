@@ -13,25 +13,18 @@ class DeleteProviderController extends AbstractController
     #[Route('/delete/{id}', name: 'delete_provider', methods: 'DELETE')]
     public function delete(ManagerRegistry $doctrine, $id):Response
     {
-        $entityManager = $doctrine->getManager();
-        $providerRepository = $entityManager->getRepository(Provider::class);
+        $em = $doctrine->getManager();
+        $providerRepository = $em->getRepository(Provider::class);
         $provider = $providerRepository->find($id);
 
         if (!$provider) {
-            $this->addFlash(
-                'status',
-                'No se encontró un proveedor con id:'
-            );
-
+            $this->addFlash('danger', 'No se encontró un proveedor con id:');
             return $this->redirectToRoute('app_home');
         }
-        $entityManager->remove($provider);
-        $entityManager->flush();
+        $em->remove($provider);
+        $em->flush();
 
-        $this->addFlash(
-            'status',
-            'Se ha borrado correctamente el registro'
-        );
+        $this->addFlash('danger','Se ha borrado correctamente el registro');
         return $this->redirectToRoute('app_home');
     }
 }

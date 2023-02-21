@@ -68,5 +68,18 @@ class AppFixtures extends Fixture
 
         $manager->persist($provider);
         $manager->flush();
+
+        $provider = new Provider();
+        $provider->setName('Albert Bocanegra');
+        $provider->setEmail('albert.bocanegra2003@gmail.com');
+        $provider->setTel('+34 608230454');
+        $type = $manager->getRepository(Type::class)->find(3);
+        $provider->setType($type);
+        $provider->setActive(1);
+        $provider->setDateCreated($date);
+        $provider->setDateUpdated($date);
+
+        $manager->persist($provider);
+        $manager->flush();
     }
 }
