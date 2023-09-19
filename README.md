@@ -41,9 +41,13 @@ En esta aplicación, tienes diferentes funcionaliades:
   * **Crear una base de datos con MySQL**: Para utilizar la base de datos existen dos opciones, ejecutar los siguientes comandos o ejecutar el script SQL que se llama "database.sql".
 
     > php bin/console doctrine:database:drop --force
+
     > php bin/console doctrine:database:create
+
     > php bin/console doctrine:migrations:diff
+
     > php bin/console doctrine:migrations:migrate
+    
     > php bin/console doctrine:fixtures:load
 
     * **Crear un repositorio accesible con Git:** A continuación tienes el enlace al repositorio: [Repositorio de GitHub](https://github.com/abocadev/proveedores-app).
